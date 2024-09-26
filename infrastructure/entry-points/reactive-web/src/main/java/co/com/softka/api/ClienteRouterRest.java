@@ -14,6 +14,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 public class ClienteRouterRest {
     private static final String PATH = "/clientes";
+
     @Bean
     public RouterFunction<ServerResponse> routerFunction(Handler handler) {
         return route(GET(PATH), handler::getClientById)

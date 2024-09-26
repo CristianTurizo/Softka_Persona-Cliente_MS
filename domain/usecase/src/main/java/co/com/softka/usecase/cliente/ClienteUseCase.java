@@ -12,19 +12,21 @@ public class ClienteUseCase {
     private final PersonaUseCase personaUseCase;
     private final ClienteGateway clienteRepository;
 
-    public Mono<Void> saveClient(Cliente cliente){
-        return Mono.empty();
-    };
-
-    public Mono<Void> updateClient(Cliente cliente){
+    public Mono<Void> saveClient(Cliente cliente) {
         return Mono.empty();
     }
 
-    public Mono<Cliente> getClientById(Integer id){
+    ;
+
+    public Mono<Void> updateClient(Cliente cliente) {
+        return Mono.empty();
+    }
+
+    public Mono<Cliente> getClientById(Integer id) {
         return Mono.just(Cliente.builder().build());
     }
 
-    public Flux<Cliente> getAllClients(){
+    public Flux<Cliente> getAllClients() {
         return Flux.empty();
     }
 

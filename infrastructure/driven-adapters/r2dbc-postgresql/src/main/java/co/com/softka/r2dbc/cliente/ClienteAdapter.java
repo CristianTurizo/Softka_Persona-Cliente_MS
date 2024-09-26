@@ -2,7 +2,6 @@ package co.com.softka.r2dbc.cliente;
 
 import co.com.softka.model.cliente.Cliente;
 import co.com.softka.model.cliente.gateways.ClienteGateway;
-import co.com.softka.model.persona.Persona;
 import co.com.softka.r2dbc.cliente.entity.ClienteEntity;
 import co.com.softka.r2dbc.helper.ReactiveAdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;

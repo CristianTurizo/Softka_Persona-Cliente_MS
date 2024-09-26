@@ -2,8 +2,8 @@ package co.com.softka.r2dbc.persona;
 
 import co.com.softka.model.persona.Persona;
 import co.com.softka.model.persona.gateways.PersonaGateway;
-import co.com.softka.r2dbc.persona.entity.PersonaEntity;
 import co.com.softka.r2dbc.helper.ReactiveAdapterOperations;
+import co.com.softka.r2dbc.persona.entity.PersonaEntity;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

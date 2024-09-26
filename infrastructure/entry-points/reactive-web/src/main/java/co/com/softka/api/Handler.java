@@ -23,6 +23,7 @@ public class Handler {
     public Mono<ServerResponse> getClientById(ServerRequest serverRequest) {
         return ServerResponse.ok().bodyValue("");
     }
+
     public Mono<ServerResponse> getAllClients(ServerRequest serverRequest) {
         return ServerResponse.ok().bodyValue("");
     }

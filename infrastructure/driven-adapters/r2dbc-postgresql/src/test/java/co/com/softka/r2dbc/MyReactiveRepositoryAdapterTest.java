@@ -1,7 +1,7 @@
 package co.com.softka.r2dbc;
 
-import co.com.softka.r2dbc.persona.PersonaRepository;
 import co.com.softka.r2dbc.persona.PersonaAdapter;
+import co.com.softka.r2dbc.persona.PersonaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

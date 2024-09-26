@@ -1,13 +1,13 @@
 package co.com.softka.r2dbc.config;
 
-import java.time.Duration;
 import io.r2dbc.pool.ConnectionPool;
 import io.r2dbc.pool.ConnectionPoolConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.Duration;
 
 @Configuration
 public class PostgreSQLConnectionPool {
@@ -16,8 +16,8 @@ public class PostgreSQLConnectionPool {
     public static final int MAX_SIZE = 15;
     public static final int MAX_IDLE_TIME = 30;
 
-	@Bean
-	public ConnectionPool getConnectionConfig(PostgresqlConnectionProperties pgProperties) {
+    @Bean
+    public ConnectionPool getConnectionConfig(PostgresqlConnectionProperties pgProperties) {
         // TODO: change these properties for yours
 //		PostgresqlConnectionProperties pgProperties = new PostgresqlConnectionProperties();
 //		pgProperties.setDatabase("postgres");
@@ -27,18 +27,18 @@ public class PostgreSQLConnectionPool {
 //		pgProperties.setPassword("secret");
 //		pgProperties.setSchema("public");
 
-		return buildConnectionConfiguration(pgProperties);
-	}
+        return buildConnectionConfiguration(pgProperties);
+    }
 
-	private ConnectionPool buildConnectionConfiguration(PostgresqlConnectionProperties properties) {
-		PostgresqlConnectionConfiguration dbConfiguration = PostgresqlConnectionConfiguration.builder()
-				.host(properties.getHost())
-				.port(properties.getPort())
-				.database(properties.getDatabase())
-				.schema(properties.getSchema())
-				.username(properties.getUsername())
-				.password(properties.getPassword())
-				.build();
+    private ConnectionPool buildConnectionConfiguration(PostgresqlConnectionProperties properties) {
+        PostgresqlConnectionConfiguration dbConfiguration = PostgresqlConnectionConfiguration.builder()
+                .host(properties.getHost())
+                .port(properties.getPort())
+                .database(properties.getDatabase())
+                .schema(properties.getSchema())
+                .username(properties.getUsername())
+                .password(properties.getPassword())
+                .build();
 
         ConnectionPoolConfiguration poolConfiguration = ConnectionPoolConfiguration.builder()
                 .connectionFactory(new PostgresqlConnectionFactory(dbConfiguration))
@@ -49,6 +49,6 @@ public class PostgreSQLConnectionPool {
                 .validationQuery("SELECT 1")
                 .build();
 
-		return new ConnectionPool(poolConfiguration);
-	}
+        return new ConnectionPool(poolConfiguration);
+    }
 }
