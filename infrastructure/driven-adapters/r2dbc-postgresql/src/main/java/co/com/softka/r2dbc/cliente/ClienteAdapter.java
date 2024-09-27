@@ -44,6 +44,6 @@ public class ClienteAdapter extends ReactiveAdapterOperations<Cliente, ClienteEn
     public Mono<Void> deleteClientById(Integer id) {
         return this.repository.deleteById(id)
                 .doFirst(() -> log.info("Deleting client with id: {}", id))
-                .doOnError(error -> log.error("Error deleting client with idPersona: {} -> {}", id, error.getMessage()));
+                .doOnError(error -> log.error("Error deleting client with id: {} -> {}", id, error.getMessage()));
     }
 }

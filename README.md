@@ -1,4 +1,19 @@
 # Proyecto Base Implementando Clean Architecture
+## Consideraciones para el reto
+
+Este repositorio corresponse a persona y cliente donde se trabajaron las funcionalidades F1 y F5 del repo.
+
+Se siguieron las reglas de negocio que estaban en la guía de ejecución del ejercicio. Además se tomaron en cuenta las siguientes consideraciones para la realización de los servicios
+
+
+### Crud cliente
+
+- Dado que no se tiene un CRUD para persona, se considera esta como una fuente de validaciones. Es decir, para crear un cliente debe estar registrado en persona. Similar a una aplicación bancaria que consulta de una api externa la información de importante de sus clientes.
+- Para crear un cliente:
+    - Se crea con número de documento de persona y contraseña, dado que el resto de datos se validan de persona.
+- Para editar un cliente:
+    - Dado que no se pueden editar personas,  solo se puede editar la contraseña y el estado del cliente
+
 
 ## Antes de Iniciar
 
