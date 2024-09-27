@@ -10,7 +10,5 @@ public interface ClienteGateway {
     Mono<Cliente> getClientById(Integer idCliente);
     Mono<Cliente> findByIdPersona(Integer idPersona);
 
-    Mono<Cliente> updateClientById(Cliente cliente);
-
-    Flux<Cliente> getAllClients();
+    Mono<Void> deleteClientById(Integer id);
 }

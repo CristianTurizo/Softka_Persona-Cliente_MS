@@ -29,7 +29,11 @@ public class ClienteUseCase {
     }
 
     public Mono<Void> updateClient(Cliente cliente) {
-        return Mono.empty();
+        return this.clienteRepository.getClientById(cliente.getIdCliente())
+                .switchIfEmpty(Mono.error(new BussinesException(Message.CLIENT_NOT_FOUND)))
+                .doOnNext(existedClient-> cliente.setIdPersona(existedClient.getIdPersona()))
+                .flatMap(this.clienteRepository::saveClient)
+                .then();
     }
 
     public Mono<Cliente> getClientById(Integer id) {
@@ -39,8 +43,10 @@ public class ClienteUseCase {
                 .map(TupleUtils.function(this::buildClient));
     }
 
-    public Flux<Cliente> getAllClients() {
-        return Flux.empty();
+    public Mono<Void> deleteClientById(Integer id) {
+        return this.clienteRepository.getClientById(id)
+                .switchIfEmpty(Mono.error(new BussinesException(Message.CLIENT_NOT_FOUND)))
+                .then(this.clienteRepository.deleteClientById(id));
     }
 
 

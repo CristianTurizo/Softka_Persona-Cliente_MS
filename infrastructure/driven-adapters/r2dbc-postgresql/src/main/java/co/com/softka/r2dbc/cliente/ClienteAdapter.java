@@ -41,12 +41,9 @@ public class ClienteAdapter extends ReactiveAdapterOperations<Cliente, ClienteEn
     }
 
     @Override
-    public Mono<Cliente> updateClientById(Cliente cliente) {
-        return this.save(cliente);
-    }
-
-    @Override
-    public Flux<Cliente> getAllClients() {
-        return this.getAllClients();
+    public Mono<Void> deleteClientById(Integer id) {
+        return this.repository.deleteById(id)
+                .doFirst(() -> log.info("Deleting client with id: {}", id))
+                .doOnError(error -> log.error("Error deleting client with idPersona: {} -> {}", id, error.getMessage()));
     }
 }

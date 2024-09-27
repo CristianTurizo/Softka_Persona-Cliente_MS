@@ -19,7 +19,7 @@ public class ClienteRouterRest {
     public RouterFunction<ServerResponse> routerFunction(Handler handler) {
         return route(GET(PATH.concat("/{id}")), handler::getClientById)
                 .andRoute(POST(PATH), handler::saveClient)
-                .andRoute(PUT(PATH.concat("/{id}")), handler::updateClient)
-                .andRoute(DELETE(PATH.concat("/{id}")), handler::getAllClients);
+                .andRoute(PUT(PATH), handler::updateClient)
+                .andRoute(DELETE(PATH.concat("/{id}")), handler::deleteClientById);
     }
 }

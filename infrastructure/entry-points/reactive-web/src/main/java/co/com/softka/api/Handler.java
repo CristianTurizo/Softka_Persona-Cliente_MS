@@ -31,7 +31,13 @@ public class Handler {
     }
 
     public Mono<ServerResponse> updateClient(ServerRequest serverRequest) {
-        return ServerResponse.ok().bodyValue("");
+        return serverRequest.bodyToMono(ClienteDto.class)
+                .map(this.mapper::toClientDomain)
+                .flatMap(this.clienteUseCase::updateClient)
+                .then(this.buildResponse(null, Message.CLIENT_UPDATED_SUCCESSFULLY, null))
+                .doFirst(() -> log.info("Start updating client"))
+                .doOnError(error -> log.error(Message.SAVE_CLIENT_ERROR.getMessage().concat(" with exception: {}"), error.getMessage()))
+                .onErrorResume(error -> this.buildResponse(null, Message.SAVE_CLIENT_ERROR, error.getMessage()));
     }
 
     public Mono<ServerResponse> getClientById(ServerRequest serverRequest) {
@@ -41,13 +47,18 @@ public class Handler {
                 .map(this.mapper::toDto)
                 .flatMap(clientDto -> this.buildResponse(clientDto, Message.CLIENT_FOUND_SUCCESSFULLY, null))
                 .doFirst(() -> log.info("Start finding client"))
-//                .doOnError(error -> log.error(Message.FIND_CLIENT_ERROR.getMessage().concat(" with exception: {}"), error.getMessage()))
-                .doOnError(e -> e.printStackTrace())
+                .doOnError(error -> log.error(Message.FIND_CLIENT_ERROR.getMessage().concat(" with exception: {}"), error.getMessage()))
                 .onErrorResume(error -> this.buildResponse(null, Message.FIND_CLIENT_ERROR, error.getMessage()));
     }
 
-    public Mono<ServerResponse> getAllClients(ServerRequest serverRequest) {
-        return ServerResponse.ok().bodyValue("");
+    public Mono<ServerResponse> deleteClientById(ServerRequest serverRequest) {
+        return Mono.just(serverRequest.pathVariable("id"))
+                .map(Integer::parseInt)
+                .flatMap(this.clienteUseCase::deleteClientById)
+                .then(this.buildResponse(null, Message.CLIENT_DELETED_SUCCESSFULLY, null))
+                .doFirst(() -> log.info("Start finding client"))
+                .doOnError(error -> log.error(Message.DELETE_CLIENT_ERROR.getMessage().concat(" with exception: {}"), error.getMessage()))
+                .onErrorResume(error -> this.buildResponse(null, Message.DELETE_CLIENT_ERROR, error.getMessage()));
     }
 
     private <T> Mono<ServerResponse> buildResponse(T data, Message responseMessage, String error) {
