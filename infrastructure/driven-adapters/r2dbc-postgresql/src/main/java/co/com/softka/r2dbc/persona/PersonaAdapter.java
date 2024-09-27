@@ -14,14 +14,21 @@ import reactor.core.publisher.Mono;
 public class PersonaAdapter extends ReactiveAdapterOperations<Persona, PersonaEntity, Integer, PersonaRepository>
         implements PersonaGateway {
     public PersonaAdapter(PersonaRepository repository, ObjectMapper mapper) {
-        super(repository, mapper, d -> mapper.map(d, co.com.softka.model.persona.Persona.class));
+        super(repository, mapper, d -> mapper.map(d, Persona.class));
     }
 
     @Override
-    public Mono<co.com.softka.model.persona.Persona> getPersonByIdentification(String identification) {
+    public Mono<Persona> getPersonByIdentification(String identification) {
         return this.repository.findByIdentification(identification)
                 .map(this::toEntity)
                 .doFirst(() -> log.info("Finding Person with identification: {}", identification))
                 .doOnError(e -> log.error("Error finding person with identification: {} -> {}", identification, e.getMessage()));
+    }
+
+    @Override
+    public Mono<Persona> getPersonById(Integer id) {
+        return this.findById(id)
+                .doFirst(() -> log.info("Finding Person with id: {}", id))
+                .doOnError(e -> log.error("Error finding person with id: {} -> {}", id, e.getMessage()));
     }
 }

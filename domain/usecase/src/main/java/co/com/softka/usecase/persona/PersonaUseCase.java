@@ -12,4 +12,8 @@ public class PersonaUseCase {
     public Mono<Persona> findPersonByDocument(String identification) {
         return personaRepository.getPersonByIdentification(identification);
     }
+
+    public Mono<Persona> findPersonById(Integer id) {
+        return personaRepository.getPersonById(id);
+    }
 }

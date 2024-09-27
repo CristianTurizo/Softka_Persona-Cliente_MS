@@ -8,6 +8,7 @@ public interface ClienteGateway {
     Mono<Cliente> saveClient(Cliente cliente);
 
     Mono<Cliente> getClientById(Integer idCliente);
+    Mono<Cliente> findByIdPersona(Integer idPersona);
 
     Mono<Cliente> updateClientById(Cliente cliente);
 

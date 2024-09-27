@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface PersonaGateway {
     Mono<Persona> getPersonByIdentification(String identification);
+    Mono<Persona> getPersonById(Integer id);
 }

@@ -9,6 +9,7 @@ import co.com.softka.usecase.persona.PersonaUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.function.TupleUtils;
 
 @RequiredArgsConstructor
 public class ClienteUseCase {
@@ -27,7 +28,21 @@ public class ClienteUseCase {
                         .map(savedClient -> this.buildClient(savedClient, person)));
     }
 
-    ;
+    public Mono<Void> updateClient(Cliente cliente) {
+        return Mono.empty();
+    }
+
+    public Mono<Cliente> getClientById(Integer id) {
+        return this.clienteRepository.getClientById(id)
+                .switchIfEmpty(Mono.error(new BussinesException(Message.CLIENT_NOT_FOUND)))
+                .flatMap(client -> Mono.just(client).zipWith(this.personaUseCase.findPersonById(client.getIdPersona())))
+                .map(TupleUtils.function(this::buildClient));
+    }
+
+    public Flux<Cliente> getAllClients() {
+        return Flux.empty();
+    }
+
 
     private Cliente buildClient(Cliente client, Persona person) {
         return client.toBuilder()
@@ -39,18 +54,6 @@ public class ClienteUseCase {
                 .telefono(person.getTelefono())
                 .password("++++")
                 .build();
-    }
-
-    public Mono<Void> updateClient(Cliente cliente) {
-        return Mono.empty();
-    }
-
-    public Mono<Cliente> getClientById(Integer id) {
-        return Mono.just(Cliente.builder().build());
-    }
-
-    public Flux<Cliente> getAllClients() {
-        return Flux.empty();
     }
 
 }
