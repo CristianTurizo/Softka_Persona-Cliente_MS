@@ -5,6 +5,15 @@ spring:
     name: "PersonaYCliente"
   devtools:
     add-properties: false
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy=org:
+          hibernate:
+            boot:
+              model:
+                naming:
+                  PhysicalNamingStrategyStandardImpl:
   h2:
     console:
       enabled: true

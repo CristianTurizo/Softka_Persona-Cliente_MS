@@ -1,17 +1,18 @@
 package co.com.softka.model.cliente;
 
+import co.com.softka.model.persona.Persona;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
-public class Cliente {
+@SuperBuilder(toBuilder = true)
+public class Cliente extends Persona {
     private Integer idCliente;
     private Integer idPersona;
     private String password;

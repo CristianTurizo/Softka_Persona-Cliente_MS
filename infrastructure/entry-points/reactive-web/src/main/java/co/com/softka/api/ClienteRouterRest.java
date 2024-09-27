@@ -17,7 +17,7 @@ public class ClienteRouterRest {
 
     @Bean
     public RouterFunction<ServerResponse> routerFunction(Handler handler) {
-        return route(GET(PATH), handler::getClientById)
+        return route(GET(PATH.concat("/{id}")), handler::getClientById)
                 .andRoute(POST(PATH), handler::saveClient)
                 .andRoute(PUT(PATH.concat("/{id}")), handler::updateClient)
                 .andRoute(DELETE(PATH.concat("/{id}")), handler::getAllClients);
